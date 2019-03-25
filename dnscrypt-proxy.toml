@@ -1,3 +1,4 @@
+
 ##############################################
 #                                            #
 #        dnscrypt-proxy configuration        #
@@ -32,11 +33,13 @@ server_names = ['cloudflare']
 ## List of local addresses and ports to listen to. Can be IPv4 and/or IPv6.
 ## Note: When using systemd socket activation, choose an empty set (i.e. [] ).
 
-listen_addresses = ['0.0.0.0:53']
+listen_addresses = ['0.0.0.0:53', '[::1]:53']
+
 
 ## Maximum number of simultaneous client connections to accept
 
 max_clients = 250
+
 
 ## Switch to a different system user after listening sockets have been created.
 ## Note (1): this feature is currently unsupported on Windows.
@@ -55,7 +58,7 @@ ipv4_servers = true
 ipv6_servers = false
 
 # Use servers implementing the DNSCrypt protocol
-dnscrypt_servers = false
+dnscrypt_servers = true
 
 # Use servers implementing the DNS-over-HTTPS protocol
 doh_servers = true
@@ -70,8 +73,10 @@ require_dnssec = false
 require_nolog = true
 
 # Server must not enforce its own blacklist (for parental control, ads blocking...)
-require_nofilter = false
+require_nofilter = true
 
+# Server names to avoid even if they match all criteria
+disabled_server_names = []
 
 
 ## Always use TCP to connect to upstream servers.
@@ -80,7 +85,7 @@ require_nofilter = false
 ## (dnscrypt-proxy will always encrypt everything even using UDP), and can
 ## only increase latency.
 
-force_tcp = true
+force_tcp = false
 
 
 ## SOCKS proxy
@@ -110,7 +115,7 @@ keepalive = 30
 ## Setting this to `false` means that some responses will be lies.
 ## Unfortunately, `false` appears to be required for Android 8+
 
-refused_code_in_responses = true
+refused_code_in_responses = false
 
 
 ## Load-balancing strategy: 'p2' (default), 'ph', 'fastest' or 'random'
@@ -120,12 +125,12 @@ refused_code_in_responses = true
 
 ## Log level (0-6, default: 2 - 0 is very verbose, 6 only contains fatal errors)
 
- log_level = 2
+# log_level = 2
 
 
 ## log file for the application
 
- log_file = '/dev/stdout'
+# log_file = 'dnscrypt-proxy.log'
 
 
 ## Use the system logger (syslog on Unix, Event Log on Windows)
@@ -186,7 +191,7 @@ fallback_resolver = '1.1.1.1:53'
 ## Never let dnscrypt-proxy try to use the system DNS settings;
 ## unconditionally use the fallback resolver.
 
-ignore_system_dns = true
+ignore_system_dns = false
 
 
 ## Maximum time (in seconds) to wait for network connectivity before
