@@ -7,7 +7,7 @@ depend() {
 
 start() {
         ebegin "Starting dnscrypt-proxy"
-        /sbin/start-stop-daemon -b --exec /usr/sbin/dnscrypt-proxy --start -m --pidfile /run/dnscrypt-proxy.pid -- -config /etc/dnscrypt-proxy/dnscrypt-proxy.toml
+        /sbin/start-stop-daemon -b --exec --start -m --pidfile /run/dnscrypt-proxy.pid /usr/sbin/dnscrypt-proxy -- -config /etc/dnscrypt-proxy/dnscrypt-proxy.toml
         eend $?
 }
 
