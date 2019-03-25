@@ -28,12 +28,12 @@
 ## Remove the leading # first to enable this; lines starting with # are ignored.
 
 # server_names = ['scaleway-fr', 'google', 'yandex', 'cloudflare']
-server_names = ['cloudflare']
+server_names = ['cisco', 'cloudflare']
 
 ## List of local addresses and ports to listen to. Can be IPv4 and/or IPv6.
 ## Note: When using systemd socket activation, choose an empty set (i.e. [] ).
 
-listen_addresses = ['127.0.0.1:5300', '[::1]:5300']
+listen_addresses = ['0.0.0.0:53', '127.0.0.1:53', '[::1]:53']
 
 
 ## Maximum number of simultaneous client connections to accept
@@ -67,7 +67,7 @@ doh_servers = true
 ## Require servers defined by remote sources to satisfy specific properties
 
 # Server must support DNS security extensions (DNSSEC)
-require_dnssec = true
+require_dnssec = false
 
 # Server must not log user queries (declarative)
 require_nolog = true
@@ -526,5 +526,8 @@ cache_neg_max_ttl = 600
 
 [static]
 
+  # [static.'cloudflare']
+  # stamp = 'sdns://AgcAAAAAAAAABzEuMC4wLjGgENk8mGSlIfMGXMOlIlCcKvq7AVgcrZxtjon911-ep0cg63Ul-I8NlFj4GplQGb_TTLiczclX57DvMV8Q-JdjgRgSZG5zLmNsb3VkZmxhcmUuY29tCi9kbnMtcXVlcnk'
+  
   # [static.'google']
-  # stamp = 'sdns://AgUAAAAAAAAAAAAOZG5zLmdvb2dsZS5jb20NL2V4cGVyaW1lbnRhbA'
+  # stamp = 'sdns://AgUAAAAAAAAAACAe9iTP_15r07rd8_3b_epWVGfjdymdx-5mdRZvMAzBuQ5kbnMuZ29vZ2xlLmNvbQ0vZXhwZXJpbWVudGFs'
