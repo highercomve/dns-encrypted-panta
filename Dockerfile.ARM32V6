@@ -1,8 +1,6 @@
 FROM arm32v6/alpine
 
-ADD dnscrypt-proxy /etc/init.d/dnscrypt-proxy
 ADD dnscrypt-proxy.toml /etc/dnscrypt-proxy/dnscrypt-proxy.toml
-RUN chmod 755 /etc/init.d/dnscrypt-proxy
 
 RUN apk update; \
     apk add curl openrc; \
@@ -11,6 +9,7 @@ RUN apk update; \
     cp linux-arm/dnscrypt-proxy /usr/sbin/dnscrypt-proxy; \
     chmod 755 /usr/sbin/dnscrypt-proxy; \
     rm -rf linux-arm dnscrypt-proxy.tar.gz; \
+    /usr/sbin/dnscrypt-proxy -service install -config /etc/dnscrypt-proxy/dnscrypt-proxy.toml; \
     rc-update add dnscrypt-proxy default
 
 
