@@ -1,0 +1,19 @@
+#!/sbin/openrc-run
+
+depend() {
+        before netmount nfsmount
+        use net
+}
+
+start() {
+        ebegin "Starting dnscrypt-proxy"
+        /sbin/start-stop-daemon -b --exec /usr/sbin/dnscrypt-proxy --start -m --pidfile /run/dnscrypt-proxy.pid -- -config /etc/dnscrypt-proxy/dnscrypt-proxy.toml
+        eend $?
+}
+
+stop() {
+        ebegin "Stopping dnscrypt-proxy"
+        kill -TERM -`cat /run/dnscrypt-proxy.pid`
+        rm -f /run/dnscrypt-proxy.pid
+        eend $?
+}

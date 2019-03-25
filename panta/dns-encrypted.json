@@ -1,0 +1,13 @@
+{
+  "configs": [
+    "lxc-dns-encrypted.config"
+  ],
+  "exec": "/sbin/init",
+  "name": "dns-encrypted",
+  "share": [
+    "NETWORK",
+    "UTS",
+    "IPC"
+  ],
+  "type": "lxc"
+}
